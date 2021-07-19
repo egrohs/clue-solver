@@ -20,5 +20,9 @@ public class App {
 		g.addSuggest(new Suggest("1", "2", Card.MRS_WHITE, Card.REVOLVER, Card.BALLROOM, Card.REVOLVER));
 		g.addSuggest(new Suggest("2", "4", Card.MISS_SCARLETT, Card.CANDLESTICK, Card.DINING_ROOM, null));
 		System.out.println("ok");
+
+		for (Player p : Game.players) {
+			System.out.println(p.getName() + " T= " + p.getTem() + " N= " + p.getNaotem() + " P= " + p.getPossiveis());
+		}
 	}
 }

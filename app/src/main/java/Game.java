@@ -9,11 +9,18 @@ import lombok.Data;
 public class Game {
 	public Game(int qntPlayers) {
 		// confidential
+		Player last = null;
 		players.add(new Player(0));
-		//vez=new Player(1);
+		// vez=new Player(1);
 		for (int n = 0; n < qntPlayers; n++) {
-			players.add(new Player(n + 1));
+			Player novo = new Player(n + 1);
+			if (players.size() > 1) {
+				last.setNext(novo);
+			}
+			players.add(novo);
+			last = novo;
 		}
+		last.setNext(players.get(1));
 	}
 
 	public void tem(Player p, Card c) {
@@ -42,19 +49,27 @@ public class Game {
 		return players.stream().filter(p -> p.getName().equals(name)).findFirst().orElse(null);
 	}
 
-	private static List<Player> players = new ArrayList<>();
+	public static List<Player> players = new ArrayList<>();
 	private Player vez;
 	private List<Suggest> sugests = new ArrayList<>();
 
 	public void addSuggest(Suggest suggest) {
 		sugests.add(suggest);
 		// os que passaram nao tem as cartas
-		//players.stream().filter(p -> p != suggest.getAsk() && p != suggest.getAnswer()).nTem();
+		Player p = suggest.getAsk().getNext();
+		while (p != suggest.getAnswer()) {
+			p.addNTem(suggest.getCharacter());
+			p.addNTem(suggest.getWeapon());
+			p.addNTem(suggest.getRoom());
+			p = p.getNext();
+		}
+		// players.stream().filter(p -> p != suggest.getAsk() && p !=
 		if (suggest.getShow() != null) {
 			tem(suggest.getAnswer(), suggest.getShow());
 		} else {
 			podeTer(suggest.getAnswer(), suggest);
 		}
+		//TODO qndo provaveis fica com 1 elemento é pq ele tem ele.
 	}
 
 	public void marca(String name, Set<Card> cs) {

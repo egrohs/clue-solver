@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 public class Player {
@@ -41,5 +42,10 @@ public class Player {
 		for (Card c : cs) {
 			addNTem(c);
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return getName() + " T= " + getTem() + " N= " + getNaotem() + " P= " + getPossiveis();
 	}
 }
