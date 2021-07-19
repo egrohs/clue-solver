@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ClueSolver</name>
-	<comment>Project ClueSolver created by Buildship.</comment>
+	<name>clue-solver</name>
+	<comment>Project clue-solver created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>
