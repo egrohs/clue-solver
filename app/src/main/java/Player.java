@@ -1,10 +1,7 @@
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import lombok.Data;
-import lombok.ToString;
 
 @Data
 public class Player {
@@ -20,14 +17,28 @@ public class Player {
 
 	void addTem(Card c) {
 		naotem.remove(c);
-		possiveis.remove(c);
+		removePode(c);
 		tem.add(c);
+	}
+
+	void removePode(Card c) {
+		possiveis.remove(c);
+		if (possiveis.size() == 1) {
+			Game.tem(this, possiveis.iterator().next());
+		}
 	}
 
 	void addNTem(Card c) {
 		tem.remove(c);
-		possiveis.remove(c);
+		removePode(c);
 		naotem.add(c);
+	}
+
+	public void addPode(Card c) {
+		possiveis.add(c);
+		if (possiveis.size() == 1) {
+			Game.tem(this, possiveis.iterator().next());
+		}
 	}
 
 	public Player(int i) {
@@ -43,7 +54,7 @@ public class Player {
 			addNTem(c);
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return getName() + " T= " + getTem() + " N= " + getNaotem() + " P= " + getPossiveis();

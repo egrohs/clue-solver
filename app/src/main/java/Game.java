@@ -23,7 +23,7 @@ public class Game {
 		last.setNext(players.get(1));
 	}
 
-	public void tem(Player p, Card c) {
+	public static void tem(Player p, Card c) {
 		players.forEach(p1 -> p1.addNTem(c));
 		p.addTem(c);
 	}
@@ -35,14 +35,15 @@ public class Game {
 
 	private void podeTer(Player p, Suggest s) {
 		if (!p.getTem().contains(s.getCharacter()) && !p.getNaotem().contains(s.getCharacter())) {
-			p.getPossiveis().add(s.getCharacter());
+			p.addPode(s.getCharacter());
 		}
 		if (!p.getTem().contains(s.getWeapon()) && !p.getNaotem().contains(s.getWeapon())) {
-			p.getPossiveis().add(s.getWeapon());
+			p.addPode(s.getWeapon());
 		}
 		if (!p.getTem().contains(s.getRoom()) && !p.getNaotem().contains(s.getRoom())) {
-			p.getPossiveis().add(s.getRoom());
+			p.addPode(s.getRoom());
 		}
+		System.out.println();
 	}
 
 	public static Player playerByName(String name) {
